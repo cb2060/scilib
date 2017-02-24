@@ -1001,3 +1001,10 @@ From 1880 to 2015, a file is available containing the year of birth, together wi
 ## Matplotlib - Total births by gender and year
 
 <img src="img/dataframe_tb.png" height="480"/>
+
+---
+
+## References
+
+"Python for Data Analysis", Wes McKinney, O'Reilly Media, Sebastopol, CA: 2013
+
