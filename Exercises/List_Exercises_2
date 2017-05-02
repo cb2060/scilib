@@ -1,0 +1,37 @@
+1) Consider the out_top1000.csv list of most popular names per year since 1880 (the file can be pulled from our repository). Make a plot of the number of people born with the names 'Bill', 'George', 'Hillary' and 'Michele'.  
+
+Why is it impossible to plot the number of people with the name of 'Barack' using this top1000 list?
+
+---
+Solution:
+import pandas as pd
+top1000 = pd.read_csv('out_top1000.csv')
+total_births_names = top1000.pivot_table('births', index='year', columns='name', aggfunc = sum )
+subset = total_births_names[['Bill', 'George', 'Hillary', 'Michele']]
+subset.plot(subplots=True, figsize=(12,10), grid=False, title="Number per year")
+---
+
+---
+subset2 = total_births_names[['Donald', 'Barack']]
+KeyError: "['Barack'] not in index"
+---
+
+(2) Solve exercise 3 ('print text in 70 characters') of "Filehandling" using pandas and Series: put every paragraph in a different Series, combine the two lists of values in a string and print then the text, while taking care of the 70 characters - and the line break in between the two paragraphs. [A]
+
+(3) Solve exercise 4 ('standard deviation') of "Filehandling" using numpy. [E,C,A]
+
+(4) Solve exercise 8 ('random amino acid') of "Filehandling" using pandas: define the aminoacids and their letters in a DataFrame. [A]
+
+(5) Extend exercise 9 ('analyses files in pdb format and write out atoms') of "Filehandling" using pandas: use dataframes to add an extra column to the information which is already available in file HETATOMS.out - call the file HETATOMS_extra.out. The extra column should say 'True' when the atom Oxygen is. [E,C,A]
+
+
+Extra) Continuation of (1)
+
+Measure the increase in naming diversity. This can be simply done by making the sum of the weight of the 1000 (or as many as available) most popular names and by plotting them. The amount covered by the highest popular names will go down, which indicates upon an increase in diversity. (Tip: use pivot_table as well as the 'aggfunc' 'sum' over the propensities to come to the results per sex).
+
+---
+Solution:
+table = top1000.pivot_table('prop', index='year', columns='sex', aggfunc=sum)
+table.plot(title='Sum of table1000.prop by year and sex', yticks=np.linspace(0, 1.2, 13), xticks=range(1880, 2020, 10))
+---
+
