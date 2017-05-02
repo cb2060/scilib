@@ -71,6 +71,7 @@ One of the key fatures of NumPy is its N-dimensional array object: `ndarray`. Th
 
 ```
 
+Remark that for higher dimensional arrays, we have used tuples.
 
 ---
 
@@ -428,25 +429,6 @@ array([[  1.70182387,   3.91458018],
 
 ---
 
-## NumPy - cumsum()
-
-The `cumsum()` function gives out the cumulative sum of the numbers in the array.
-
-```
->>> a = np.array([[1,2,3], [4,5,6]])
->>> np.cumsum(a)
-array([ 1,  3,  6, 10, 15, 21])
->>> np.cumsum(a,axis=0)   #sum over columns
-array([[1, 2, 3],
-       [5, 7, 9]])
->>> np.cumsum(b,axis=1)   #sum over rows
-array([[ 1,  3,  6],
-       [ 4,  9, 15]])
-
-```
-
----
-
 ## Pandas - Series
 
 A `Series` is a one-dimensional object containing an array of data and an associated array of data labels, called its index.
@@ -609,15 +591,9 @@ Assigning a column that doesn't exist will create a new column.
 `del` removes columns
 
 ```
->>> del frame2['thick']
->>> frame2
-       numberofromans     Celt
-       one               1.5  Asterix
-       two               1.7  Asterix
-       three             3.6  Asterix
-       four              2.4   Obelix
-       five              2.9   Obelix
-       
+>>> Index([u'numberofromans', u'Celt'], dtype='object')
+Index([u'numberofromans', u'Celt'], dtype='object')
+
 ```
 
 ---
@@ -709,12 +685,12 @@ b    2
 c    3
 d    0
 dtype: int64
->>> obj2 = pd.Series([ 4, 7, -3, 2], index=['d', 'a', 'b', 'c'])
->>> obj2.sort_values()
-b   -3
-c    2
-d    4
-a    7
+>>> obj2 = pd.Series([ 4, 7, -3, 2])
+>>> obj.sort_values()
+d    0
+a    1
+b    2
+c    3
 dtype: int64
 
 ```
@@ -726,7 +702,7 @@ dtype: int64
 ```
 >>> frame = pd.DataFrame(np.arange(8).reshape((2,4)), index=['three', 'one'],
 columns=['d', 'a', 'b', 'c'])
->>> frame.sort_index()     #The same as frame.sort_index(axis=0) 
+>>> frame.sort_index()
        d  a  b  c
 one    4  5  6  7
 three  0  1  2  3
@@ -734,7 +710,7 @@ three  0  1  2  3
        a  b  c  d
 three  1  2  3  0
 one    5  6  7  4
->>> frame.sort_index(axis=1, ascending=False)
+>>> frame.sort_index(axis=1, ascending=false)
        d  c  b  a
 three  0  3  2  1
 one    4  7  6  5
@@ -847,14 +823,13 @@ Basic syntax for a plot
 Other styles and colors are available and can easily be searched. 
 
 ```
->>> plt.plot(np.random.randn(30).cumsum(), color='k', linestyle='solid',
-marker='*')
+>>> plt.plot(np.random.randn(30).cumsum(), color='k', linestyle='solid', marker='*')
 
 ```
 
 <img src="img/figure_B.png" height="125"/>
 
-
+The `cumsum()` function gives out the cumulative sum of the numbers in the array.   
 
 ---
 
@@ -1029,61 +1004,7 @@ From 1880 to 2015, a file is available containing the year of birth, together wi
 
 ---
 
-## PIP
-
-Pip is a package management system used to install and manage software packages written in Python, taken from the `Python Package Index' (PyPI).
-
-Use:
-
-```
->>> pip install package-name
->>> pip uninstall package-name
-
-```
-
----
-
-## Virtual environments
-
-Miraculix has been coding a lot throughout his life. He has programs made from the early days of Python - and he has ones which he made yesterday. To avoid compatibility issues ("program Herbs1.py needs the module ColorGrass-1.0.2, while program IdefixIllness.py needs the module ColorGrass-12.1.15b"), Miraculix uses `virtual environments` in which he can load the exact packages he needs.
-
-```
-$ which python3
-/usr/bin/python3
-$ python3 -m venv ./venv
-$ source venv/bin/activate
-(venv)$ which python3
-.../venv/bin/python3
-(venv)$ which pip3
-.../venv/bin/pip3
-(venv)$ pip3 install ColorGrass-1.0.2
-
-```
-
-<!--
-Illustration with BeautifulSoup4 (bs4):
-
-pip3 install BeautifulSoup4
-
-story.py:
-from bs4 import BeautifulSoup
-soup = BeautifulSoup(html_doc, 'html.parser')
-
-print(soup.prettify())
--->
-
-... and Miraculix makes sure he is aware of the employed packages:
-
-```
-(venv)$ pip3 freeze > requirements.txt
-
-```
-
-
----
-
 ## References
 
 "Python for Data Analysis", Wes McKinney, O'Reilly Media, Sebastopol, CA: 2013
 
-https://docs.python.org/3/

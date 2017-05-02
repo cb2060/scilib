@@ -71,6 +71,7 @@ One of the key fatures of NumPy is its N-dimensional array object: `ndarray`. Th
 
 ```
 
+Remark that for higher dimensional arrays, we have used tuples.
 
 ---
 
@@ -424,25 +425,6 @@ To do calculations on matrices, `numpy.linalg` has a standard set of functions, 
 array([[  1.70182387,   3.91458018],
        [  3.91458018,  10.22597796]])
        
-```
-
----
-
-## NumPy - cumsum()
-
-The `cumsum()` function gives out the cumulative sum of the numbers in the array.
-
-```
->>> a = np.array([[1,2,3], [4,5,6]])
->>> np.cumsum(a)
-array([ 1,  3,  6, 10, 15, 21])
->>> np.cumsum(a,axis=0)   #sum over columns
-array([[1, 2, 3],
-       [5, 7, 9]])
->>> np.cumsum(b,axis=1)   #sum over rows
-array([[ 1,  3,  6],
-       [ 4,  9, 15]])
-
 ```
 
 ---
@@ -847,14 +829,13 @@ Basic syntax for a plot
 Other styles and colors are available and can easily be searched. 
 
 ```
->>> plt.plot(np.random.randn(30).cumsum(), color='k', linestyle='solid',
-marker='*')
+>>> plt.plot(np.random.randn(30).cumsum(), color='k', linestyle='solid', marker='*')
 
 ```
 
 <img src="img/figure_B.png" height="125"/>
 
-
+The `cumsum()` function gives out the cumulative sum of the numbers in the array.   
 
 ---
 
