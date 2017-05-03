@@ -773,7 +773,7 @@ Since this is a comma-separated form, use is made of `pandas.read_csv` to load t
 
 ```
 import pandas as pd
-names1880 = pd.read_csv('Names/yob1880.txt', names=['name', 'sex', 'births'])
+names1880 = pd.read_csv('names/yob1880.txt', names=['name', 'sex', 'births'])
 
 ```
 
@@ -828,7 +828,7 @@ It is advisable to use pandas, making use of the ExcelFile class.
 Data stored in a sheet can then be read into DataFrame using parse:
 
 ```
->>> table = xls_file.parse('Sheet1')
+>>> table = xls_file.parse('sheet1')
 
 ```
 
