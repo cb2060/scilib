@@ -816,21 +816,6 @@ Name: births, dtype: int64
 
 On the internet, Kaningentix finds an excel sheet containing all herbs, grasses and vegetables which can be found in the forest. The list contains not only the names and the subsequent characterizations, but also where these are found and the time of the medicinal effect.
 
-It is advisable to use pandas, making use of the `read_excel` function.
-
-```
->>> table = pd.read_excel(data.xlsx)
->>> table
-      herb  color  place          why?
-0    grass   green  river  knee injury
-1  mushroom  brown   tree     headache
-      
-```
-
-
-
-<!--
-
 It is advisable to use pandas, making use of the ExcelFile class.
 
 
@@ -846,8 +831,6 @@ Data stored in a sheet can then be read into DataFrame using parse:
 >>> table = xls_file.parse('Sheet1')
 
 ```
-
--->
 
 ---
 
@@ -1055,8 +1038,8 @@ Pip is a package management system used to install and manage software packages 
 Use:
 
 ```
-$ pip3 install package-name
-$ pip3 uninstall package-name
+$ pip install package-name
+$ pip uninstall package-name
 
 ```
 
@@ -1105,5 +1088,3 @@ print(soup.prettify())
 "Python for Data Analysis", Wes McKinney, O'Reilly Media, Sebastopol, CA: 2013
 
 https://docs.python.org/3/
-
-https://matplotlib.org/gallery.html

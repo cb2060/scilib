@@ -1,0 +1,10 @@
+Steps for Completing and Submitting Assignment
+
+    Create a fork of this repository (https://gits-15.sys.kth.se/BB1000/LAB1112)
+    Clone your fork to your local computer (git clone git@gits-15.sys.kth.se:kth_username/LAB1112)
+    Read description of computer exercise in Assignment folder
+    Complete computer exercise in your own folder named FirstName_LastName
+    Commit your work to your local git repository (master branch)
+    Push your work to your fork
+    Go to students GitHub https://gits-15.sys.kth.se and submit a pull request for merging the master branch of your fork into the master branch of the original repository maintained by teachers
+
