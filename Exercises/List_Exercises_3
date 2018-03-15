@@ -8,7 +8,7 @@
 
 (3) Extend exercise 9 ('analyses files in pdb format and write out atoms') of "Filehandling" using pandas: use dataframes to add an extra column to the information which is already available in file HETATOMS.out - call the file HETATOMS_extra.out. The extra column should say 'True' when the atom Oxygen is. [E,C,A]
 
-(4) Extend exercise 10 ('shift HETATOMS') of "Filehandling" by a few lines. Save the coordinates of the atoms-to-be-written-out in a list of Series, save the coordinates of the translation vector also in a Series. Write finally the difference of the coordinates out in a file ""_shifted_negatively.xyz". [A]
+(4) Extend exercise 10 ('shift HETATOMS') of "Filehandling" by a few lines. Save the coordinates of the found copper, magnesium, zinc, sodium or calcium ions in a list of Series, save the coordinates of the translation vector also in a Series. Substract now the translation vactor from the selected ions and write the resulting coordinates out in a file ""_shifted_negatively.xyz". [A]
 
 Extra (1+2 not possible because 'pivot_table' has not been explained):
 
