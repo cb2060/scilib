@@ -25,6 +25,17 @@ layout: false
 
 ```
 
+<!--
+If ModuleNotFoundError, install first
+
+import sys
+!conda install --yes --prefix {sys.prefix} numpy (or pandas or matplotlib)
+
+import pandas (or numpy or matplotlib.pyplot) as pd (or np or plt)
+
+-->
+
+
 ---
 
 ## NumPy
@@ -53,6 +64,15 @@ One of the key fatures of NumPy is its N-dimensional array object: `ndarray`. Th
 
 ```
 
+<!--
+np.ndarray(data2) does not work:
+
+arr3= np.ndarray(data2)
+TypeError: 'list' object cannot be interpreted as an integer
+
+-->
+
+
 ---
 
 ## NumPy - Default arrays
@@ -71,6 +91,19 @@ One of the key fatures of NumPy is its N-dimensional array object: `ndarray`. Th
 
 ```
 
+<!--
+In [19]: print(np.ones(10))
+[1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+
+In [21]: print(np.ones((3,6)))
+
+[[1. 1. 1. 1. 1. 1.]
+ [1. 1. 1. 1. 1. 1.]
+  [1. 1. 1. 1. 1. 1.]]
+
+is not working with np.twos!
+
+-->
 
 ---
 
@@ -126,6 +159,19 @@ One of the key fatures of NumPy is its N-dimensional array object: `ndarray`. Th
 >>> arr= np.arange(10)
 >>> print(arr[5])
 5
+```
+
+<!--
+In [34]: print(arr[10])
+---------------------------------------------------------------------------
+IndexError                                Traceback (most recent call last)
+<ipython-input-34-347682eaa77c> in <module>()
+  1 print(arr[10])
+
+IndexError: index 10 is out of bounds for axis 0 with size 10
+-->
+
+```
 >>> print(arr[5:8])
 [5 6 7]
 >>> arr[5:8] = 12
@@ -138,6 +184,31 @@ One of the key fatures of NumPy is its N-dimensional array object: `ndarray`. Th
 [ 0  1  2  3  4 64 64 64  8  9]
 
 ```
+
+<!--
+Slicing works in the same way as normal slicing:
+
+In [35]: trysomething=[1,2,3,4,5,6,7,8]
+
+In [36]: trysomething[2]
+Out[36]: 3
+
+In [37]: trysomething[2:5]
+Out[37]: [3, 4, 5]
+
+In [39]: trysomethingarray = np.array(trysomething)
+
+In [40]: print(trysomethingarray[2:5])
+[3 4 5]
+-->
+
+<!--
+Assignments of values in lists is not possible like in arrays:
+
+In [53]: trysomething[2:5] = 12
+
+TypeError: can only assign an iterable
+-->
 
 ---
 
@@ -152,6 +223,21 @@ One of the key fatures of NumPy is its N-dimensional array object: `ndarray`. Th
 
 ```
 
+<!--
+Basic indexing is the same as with lists:
+
+In [58]: try2d = [[1,2,3],[4,5,6],[7,8,9]]
+
+In [59]: try2d[2]
+Out[59]: [7, 8, 9]
+
+In [60]: try2d[0]
+Out[60]: [1, 2, 3]
+
+In [61]: try2d[0][2]
+Out[61]: 3
+-->
+
 ```
 >>> print(arr2d[:2, 1:])
 [[2 3]
@@ -159,20 +245,56 @@ One of the key fatures of NumPy is its N-dimensional array object: `ndarray`. Th
 
 ```
 
+<!--
 Entries up till (but not including) the second row are kept, as well as the column starting from (and including) the first one.
+
+In [58]: try2d = [[1,2,3],[4,5,6],[7,8,9]]
+
+In [62]: try2d[:2, 1:]
+TypeError: list indices must be integers or slices, not tuple
+
+Is something else then
+
+In [63]: try2d[:2][1:]       
+Out[63]: [[4, 5, 6]]
+
+is somehow the same as (try2d[:2])[1:] 
+
+In [64]: try2d[:2]
+Out[64]: [[1, 2, 3], [4, 5, 6]]
+
+-->
 
 ---
 
 ## NumPy - Boolean indexing
 
 ```
->>> names = np.array(['Asterix', 'Obelix', 'Idefix', 'Asterix', 'Idefix', 'Obelix', 'Obelix'])
+>>> names = np.array(['Asterix', 'Obelix', 'Idefix', 'Asterix', 'Idefix',\
+'Obelix', 'Obelix'])
 >>> names
 array(['Asterix', 'Obelix', 'Idefix', 'Asterix', 'Idefix', 'Obelix',
        'Obelix'],
       dtype='|S7')	     
+>>> names == 'Asterix'
+array([ True, False, False,  True, False, False, False], dtype=bool)
 
 ```
+
+Remark that we print here the complete object. We can also just `print` the content:
+
+```
+>>> print(names)
+['Asterix' 'Obelix' 'Idefix' 'Asterix' 'Idefix' 'Obelix' 'Obelix']
+
+>>> print(names == 'Asterix')
+[ True False False  True False False False]
+
+```
+
+---
+
+## NumPy - Boolean indexing
 
 ```
 >>> data = np.random.randn(7,4)
@@ -184,8 +306,6 @@ array([[ 0.02062421, -0.1369847 ,  0.90160195,  0.75181516],
        [ 1.22254501, -0.68403217,  0.39343747,  1.59037781],
        [ 0.02684093, -0.62523998,  0.06727077, -1.3981326 ],
        [ 0.70864672, -1.46741426, -1.69648987, -0.47846134]])
->>> names == 'Asterix'
-array([ True, False, False,  True, False, False, False], dtype=bool)
 
 ```
 
@@ -211,7 +331,7 @@ array([[ 0.90160195,  0.75181516],
        
 ```
 
-For negation `!=` can be used as wel as `-`
+For negation `!=` can be used as wel as `-` (in the newest numpy version, this is `~`)
 
 ```
 >>> names != 'Asterix'
@@ -294,7 +414,7 @@ A universal function ('ufunction') is a function that performs elementwise opera
 
 Examples of unary ufunctions are `sqrt`, `exp`, `abs`, `log`, `sign`, `floor` (largest integer less than or equal to the element), `ceil` (analogon for `floor` but then higher or equal to the element), `cos`,...
 
-Examples of binary ufunctions are `add`, `subtract`, `multiply`, `divide`, `power`, `max`, `min`, `mod` (remainder of division), `greater`, `less`, `less_equal`, ...
+Examples of binary ufunctions are `add`, `subtract`, `multiply`, `divide`, `power`, `maximum`, `minimum`, `mod` (remainder of division), `greater`, `less`, `less_equal`, ...
 
 
 ---
@@ -369,7 +489,8 @@ array([-0.61990769,  0.24762018,  0.67810754,  0.71176752,  0.77071301,
 ```
 
 ```
->>> names = np.array(['Asterix', 'Kanalltix', 'Kaningentix', 'Asterix', 'Kaningentix', 'Asterix', 'Kaningentix'])
+>>> names = np.array(['Asterix', 'Kanalltix', 'Kaningentix', 'Asterix', \
+'Kaningentix', 'Asterix', 'Kaningentix'])
 >>> np.unique(names)
 array(['Asterix', 'Kanalltix', 'Kaningentix'],
       dtype='|S11')
@@ -413,7 +534,7 @@ When Heroix wants to write the service numbers of his Celtic warriors on a file,
 
 ## NumPy - Linear algebra
 
-Attention has to be paid at `*` which is an element-wsie product instead of a matrix dot product. The function `dot` is used in numpy (see 'Transposing arrays').
+Attention has to be paid at `*` which is an element-wise product instead of a matrix dot product. The function `dot` is used in numpy (see 'Transposing arrays').
 
 To do calculations on matrices, `numpy.linalg` has a standard set of functions, like `diag` (return the diagonal elements of a square matrix), `trace`, `det` (matrix determinant), `eig` (eigenvalues and eigenvectors of a square matrix), `inv` (inverse),...
 
@@ -439,7 +560,7 @@ array([ 1,  3,  6, 10, 15, 21])
 >>> np.cumsum(a,axis=0)   #sum over columns
 array([[1, 2, 3],
        [5, 7, 9]])
->>> np.cumsum(b,axis=1)   #sum over rows
+>>> np.cumsum(a,axis=1)   #sum over rows
 array([[ 1,  3,  6],
        [ 4,  9, 15]])
 
@@ -463,7 +584,7 @@ dtype: int64
 array([ 4,  7, -5,  3])
 >>> obj.index 
 RangeIndex(start=0, stop=4, step=1)
->>> for j in obj.index : print j
+>>> for j in obj.index : print(j)
 0
 1
 2
@@ -578,10 +699,10 @@ Name: numberofromans, dtype: float64
 
 ```
 
-Rows can be retrieved by using `ix` and the index.
+Rows can be retrieved by using `loc` and the index.
 
 ```
->>> frame2.ix['three']
+>>> frame2.loc['three']
 numberofromans        3.6
 Celt              Asterix
 Name: three, dtype: object
@@ -611,7 +732,7 @@ Assigning a column that doesn't exist will create a new column.
 ```
 >>> del frame2['thick']
 >>> frame2
-       numberofromans     Celt
+              numberofromans     Celt
        one               1.5  Asterix
        two               1.7  Asterix
        three             3.6  Asterix
@@ -673,9 +794,9 @@ Remark that d is missing in B, while f and g are absent in A.
 ## Pandas - Data alignment
 
 ```
->>> df1 = pd.DataFrame(np.arange(9.).reshape((3, 3)), columns=list('bcd'),
+>>> df1 = pd.DataFrame(np.arange(9.).reshape(3, 3), columns=list('bcd'),
 index=['Asterix', 'Obelix', 'Kanalltix']) 
->>> df2 = pd.DataFrame(np.arange(12.).reshape((4,3)), columns=list('bde'),
+>>> df2 = pd.DataFrame(np.arange(12.).reshape(4,3), columns=list('bde'),
 index=['Miraculix', 'Asterix', 'Obelix', 'Kaningentix'])
 >>> df1
             b    c    d
@@ -725,7 +846,7 @@ dtype: int64
 ## Pandas - Sorting
 
 ```
->>> frame = pd.DataFrame(np.arange(8).reshape((2,4)), index=['three', 'one'],
+>>> frame = pd.DataFrame(np.arange(8).reshape(2,4), index=['three', 'one'],
 columns=['d', 'a', 'b', 'c'])
 >>> frame.sort_index()     #The same as frame.sort_index(axis=0) 
        d  a  b  c
@@ -772,8 +893,8 @@ Minnie,F,1746
 Since this is a comma-separated form, use is made of `pandas.read_csv` to load the data
 
 ```
-import pandas as pd
-names1880 = pd.read_csv('Names/yob1880.txt', names=['name', 'sex', 'births'])
+>>> import pandas as pd
+>>> names1880 = pd.read_csv('Names/yob1880.txt', names=['name', 'sex', 'births'])
 
 ```
 
@@ -819,7 +940,7 @@ On the internet, Kaningentix finds an excel sheet containing all herbs, grasses 
 It is advisable to use pandas, making use of the `read_excel` function.
 
 ```
->>> table = pd.read_excel(data.xlsx)
+>>> table = pd.read_excel('data.xlsx')
 >>> table
       herb  color  place          why?
 0    grass   green  river  knee injury
@@ -857,6 +978,7 @@ Basic syntax for a plot
 
 ```
 >>> plt.plot(np.random.randn(30), linestyle='--', color='g')
+>>> plt.show()
 
 ```
 
@@ -867,6 +989,7 @@ Other styles and colors are available and can easily be searched.
 ```
 >>> plt.plot(np.random.randn(30).cumsum(), color='k', linestyle='solid',
 marker='*')
+>>> plt.show()
 
 ```
 
