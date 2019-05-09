@@ -774,8 +774,8 @@ dtype: int64
 * Slicing
 ```
 >>> s['b': 'c']
-b    2
-c    3
+b    200
+c    300
 dtype: int64
 >>>
 ```
