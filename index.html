@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <style type="text/css">
-      @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
-      @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-      @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
       body {
         font-family: 'Droid Serif';
@@ -200,10 +200,11 @@ https://doi.org/10.3847/2041-8213/ab0e85
 
 ## Builtins
 
-~~~
+```
 &gt;&gt;&gt; dir()
 [&#39;__annotations__&#39;, &#39;__builtins__&#39;, &#39;__doc__&#39;, &#39;__loader__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;__spec__&#39;]
-~~~
+```
+
 ~~~
 &gt;&gt;&gt; __builtins__
 &lt;module &#39;builtins&#39; (built-in)&gt;
@@ -639,7 +640,7 @@ Note that for objects of ``ndarray`` type, multiplication means elementwise mult
 ```
 --
 ```
-    &gt;&gt;&gt; print(numpy.log(v)) #doctest: +SKIP
+    &gt;&gt;&gt; print(numpy.log(v))
     ./linalg.py:98: RuntimeWarning: divide by zero encountered in log
       print(numpy.log(v))
     [       -inf -1.60943791 -0.91629073 -0.51082562 -0.22314355]
@@ -648,7 +649,7 @@ Note that for objects of ``ndarray`` type, multiplication means elementwise mult
 
 ---
 
-### More linear algebra
+## More linear algebra
 
 * Solve a linear  system of equations
 $$Ax = b$$
@@ -703,11 +704,489 @@ $$Ax = x\lambda$$
 
 ---
 
-### Refernces
+## Refernces
 
 * http://www.numpy.org
 * http://www.scipy-lectures.org/intro/numpy/index.html
 * Videos: https://pyvideo.org/search.html?q=numpy
+
+---
+
+
+## Matplotlib
+
+- The standard 2D-plotting library in Python
+- Production-quality graphs
+- Interactive and non-interactive use
+- Many output formats
+- Flexible and customizable
+
+---
+
+## First example
+
+### The absolute minimum  you need to know
+
+* You have a set of points (x,y) on file
+
+```
+-3.141593 -0.000000
+-3.013364 -0.127877
+-2.885136 -0.253655
+...
+3.141593 0.000000
+```
+--
+
+* How do you get to  this
+
+&lt;img src=&#34;img/sin.png&#34; height=&#34;250&#34; /&gt;
+
+---
+
+### Next
+
+* Import the plotting library
+```
+import matplotlib.pyplot as plt
+import numpy as np
+```
+--
+
+* Load the data from file
+```
+data = np.loadtxt(&#39;filename&#39;)
+```
+--
+
+* Call the `plot` function
+```
+plt.plot(data[:, 0], data[:, 1])
+```
+--
+
+* Show the result
+```
+plt.show()
+```
+
+*Note:* in Jupyter notebook you may want to do
+```
+%matplotlib inline
+```
+---
+
+### Next? 
+
+#### Refinement
+
+* Change color, linestyle, linewidth
+--
+
+
+* Change window size (ylim)
+--
+
+
+* Change xticks
+--
+
+
+* Set title
+--
+
+
+* Multi-line plots
+--
+
+
+* Legends
+
+---
+
+### In practice
+
+How do you do when need a particlar type of figure?
+
+* Go to the matplotlib gallery: http://matplotlib.org/gallery
+* Try some exercises at http://scipy-lectures.github.io/intro/matplotlib/matplotlib.html#other-types-of-plots-examples-and-exercises
+* See also: https://realpython.com/python-matplotlib-guide/
+
+
+---
+
+## The `pandas` module
+
+Setup:
+
+```
+&gt;&gt;&gt; import pandas as pd
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; import matplotlib.pyplot as plt
+
+```
+
+Two main data structures
+
+* Series
+* Data frames
+---
+
+### Series
+
+One-dimensional labeled data
+
+```
+&gt;&gt;&gt; s = pd.Series([0.1, 0.2, 0.3, 0.4])
+&gt;&gt;&gt; print s
+0    0.1
+1    0.2
+2    0.3
+3    0.4
+dtype: float64
+
+```
+--
+```
+&gt;&gt;&gt; print s.index
+Int64Index([0, 1, 2, 3], dtype=&#39;int64&#39;)
+
+```
+--
+```
+&gt;&gt;&gt; print s.values
+[ 0.1  0.2  0.3  0.4]
+
+```
+
+---
+
+* indices can be labels (like a dict with order)
+
+```
+&gt;&gt;&gt; s = pd.Series(np.arange(4), index=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;])
+&gt;&gt;&gt; print s
+a    0
+b    1
+c    2
+d    3
+dtype: int64
+&gt;&gt;&gt; print s[&#39;d&#39;]
+3
+&gt;&gt;&gt;
+```
+--
+* Initialize with dict
+
+```
+&gt;&gt;&gt; s = pd.Series({&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3, &#39;d&#39;: 4})
+&gt;&gt;&gt; print s
+a    1
+b    2
+c    3
+d    4
+dtype: int64
+&gt;&gt;&gt;
+```
+--
+* Indexing as a dict
+
+```
+&gt;&gt;&gt; print s[&#39;a&#39;]
+1
+
+```
+---
+
+* Elementwise operations
+```
+&gt;&gt;&gt; print s * 100
+a    100
+b    200
+c    300
+d    400
+dtype: int64
+&gt;&gt;&gt;
+```
+--
+
+* Slicing
+```
+&gt;&gt;&gt; s[&#39;b&#39;: &#39;c&#39;]
+b    2
+c    3
+dtype: int64
+&gt;&gt;&gt;
+```
+
+---
+
+* List indexing
+```
+&gt;&gt;&gt; print s[[&#39;b&#39;, &#39;c&#39;]]
+b    2
+c    3
+dtype: int64
+&gt;&gt;&gt;
+```
+--
+
+* Bool indexing
+```
+&gt;&gt;&gt; print s[s&gt;2]
+c    3
+d    4
+dtype: int64
+&gt;&gt;&gt;
+```
+--
+
+* Other operations
+```
+&gt;&gt;&gt; s.mean()
+2.5
+&gt;&gt;&gt;
+```
+---
+
+* Alignment on indices
+```
+&gt;&gt;&gt; s[&#39;a&#39;:&#39;b&#39;] + s[&#39;b&#39;:&#39;c&#39;]
+a   NaN
+b     4
+c   NaN
+dtype: float64
+&gt;&gt;&gt;
+```
+---
+
+### DataFrames
+
+* Tabular data structure (like spreadsheet, sql table)
+* Multiple series with common index
+
+```
+&gt;&gt;&gt; data = {&#39;country&#39;: [&#39;Belgium&#39;, &#39;France&#39;, &#39;Germany&#39;, &#39;Netherlands&#39;, &#39;United Kingdom&#39;],
+...        &#39;population&#39;: [11.3, 64.3, 81.3, 16.9, 64.9],
+...        &#39;area&#39;: [30510, 671308, 357050, 41526, 244820],
+...        &#39;capital&#39;: [&#39;Brussels&#39;, &#39;Paris&#39;, &#39;Berlin&#39;, &#39;Amsterdam&#39;, &#39;London&#39;]}
+&gt;&gt;&gt;
+```
+--
+```
+&gt;&gt;&gt; countries = pd.DataFrame(data)
+&gt;&gt;&gt; print countries
+     area    capital         country  population
+0   30510   Brussels         Belgium        11.3
+1  671308      Paris          France        64.3
+2  357050     Berlin         Germany        81.3
+3   41526  Amsterdam     Netherlands        16.9
+4  244820     London  United Kingdom        64.9
+&gt;&gt;&gt;
+```
+
+---
+
+* Attributes: index, columns, dtypes, values
+
+```
+&gt;&gt;&gt; countries.index
+Int64Index([0, 1, 2, 3, 4], dtype=&#39;int64&#39;)
+&gt;&gt;&gt;
+```
+--
+```
+&gt;&gt;&gt; countries.columns
+Index([&#39;area&#39;, &#39;capital&#39;, &#39;country&#39;, &#39;population&#39;], dtype=&#39;object&#39;)
+&gt;&gt;&gt;
+```
+--
+```
+&gt;&gt;&gt; countries.dtypes
+area            int64
+capital        object
+country        object
+population    float64
+dtype: object
+&gt;&gt;&gt;
+```
+--
+```
+&gt;&gt;&gt; countries.values
+array([[30510, &#39;Brussels&#39;, &#39;Belgium&#39;, 11.3],
+       [671308, &#39;Paris&#39;, &#39;France&#39;, 64.3],
+       [357050, &#39;Berlin&#39;, &#39;Germany&#39;, 81.3],
+       [41526, &#39;Amsterdam&#39;, &#39;Netherlands&#39;, 16.9],
+       [244820, &#39;London&#39;, &#39;United Kingdom&#39;, 64.9]], dtype=object)
+&gt;&gt;&gt;
+```
+---
+* Info
+```
+&gt;&gt;&gt; countries.info()
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 5 entries, 0 to 4
+Data columns (total 4 columns):
+area          5 non-null int64
+capital       5 non-null object
+country       5 non-null object
+population    5 non-null float64
+dtypes: float64(1), int64(1), object(2)
+memory usage: 200.0 bytes
+&gt;&gt;&gt;
+```
+---
+
+* Set a column as index
+```
+&gt;&gt;&gt; print countries
+     area    capital         country  population
+0   30510   Brussels         Belgium        11.3
+1  671308      Paris          France        64.3
+2  357050     Berlin         Germany        81.3
+3   41526  Amsterdam     Netherlands        16.9
+4  244820     London  United Kingdom        64.9
+&gt;&gt;&gt;
+```
+--
+```
+&gt;&gt;&gt; countries = countries.set_index(&#39;country&#39;)
+&gt;&gt;&gt;
+```
+--
+```
+&gt;&gt;&gt; print countries
+                  area    capital  population
+country                                      
+Belgium          30510   Brussels        11.3
+France          671308      Paris        64.3
+Germany         357050     Berlin        81.3
+Netherlands      41526  Amsterdam        16.9
+United Kingdom  244820     London        64.9
+&gt;&gt;&gt;
+```
+
+---
+
+* Access a single series in a table
+```
+&gt;&gt;&gt; print countries[&#39;area&#39;]
+country
+Belgium            30510
+France            671308
+Germany           357050
+Netherlands        41526
+United Kingdom    244820
+Name: area, dtype: int64
+&gt;&gt;&gt;
+```
+--
+```
+&gt;&gt;&gt; print countries[&#39;capital&#39;][&#39;France&#39;]
+Paris
+&gt;&gt;&gt;
+```
+--
+
+* Arithmetic (population density)
+```
+&gt;&gt;&gt; print countries[&#39;population&#39;]/countries[&#39;area&#39;]*10**6
+country
+Belgium           370.370370
+France             95.783158
+Germany           227.699202
+Netherlands       406.973944
+United Kingdom    265.092721
+dtype: float64
+&gt;&gt;&gt;
+```
+
+---
+
+
+* Add new column
+```
+&gt;&gt;&gt; countries[&#39;density&#39;] =  countries[&#39;population&#39;]/countries[&#39;area&#39;]*10**6
+&gt;&gt;&gt; print countries
+                  area    capital  population     density
+country                                                  
+Belgium          30510   Brussels        11.3  370.370370
+France          671308      Paris        64.3   95.783158
+Germany         357050     Berlin        81.3  227.699202
+Netherlands      41526  Amsterdam        16.9  406.973944
+United Kingdom  244820     London        64.9  265.092721
+&gt;&gt;&gt;
+```
+
+--
+
+* Filter data
+```
+&gt;&gt;&gt; print countries[countries[&#39;density&#39;] &gt; 300]
+              area    capital  population     density
+country                                              
+Belgium      30510   Brussels        11.3  370.370370
+Netherlands  41526  Amsterdam        16.9  406.973944
+&gt;&gt;&gt;
+```
+---
+
+* Sort data
+```
+&gt;&gt;&gt; print countries.sort(&#39;density&#39;, ascending=False)
+                  area    capital  population     density
+country                                                  
+Netherlands      41526  Amsterdam        16.9  406.973944
+Belgium          30510   Brussels        11.3  370.370370
+United Kingdom  244820     London        64.9  265.092721
+Germany         357050     Berlin        81.3  227.699202
+France          671308      Paris        64.3   95.783158
+&gt;&gt;&gt;
+```
+
+--
+
+* Statistics
+```
+&gt;&gt;&gt; print countries.describe()
+                area  population     density
+count       5.000000    5.000000    5.000000
+mean   269042.800000   47.740000  273.183879
+std    264012.827994   31.519645  123.440607
+min     30510.000000   11.300000   95.783158
+25%     41526.000000   16.900000  227.699202
+50%    244820.000000   64.300000  265.092721
+75%    357050.000000   64.900000  370.370370
+max    671308.000000   81.300000  406.973944
+&gt;&gt;&gt;
+```
+---
+
+* Plotting
+```
+&gt;&gt;&gt; countries.plot()
+&gt;&gt;&gt;
+```
+&lt;img src=&#34;figure_1.png&#34; height=&#34;300&#34;/&gt;
+---
+* Plotting barchart
+```
+&gt;&gt;&gt; countries.plot(kind=&#39;bar&#39;)
+&gt;&gt;&gt;
+```
+&lt;img src=&#34;figure_2.png&#34; height=&#34;300&#34;/&gt;
+---
+
+### Features
+
+* like numpy arrays with labels
+* supported import/export formats: CSV, SQL, Excel...
+* support for missing data
+* support for heterogeneous data
+* merging data
+* reshaping data
+* easy plotting 
+
     </textarea>
 
     <script src="/external_libraries/refreeze/js/remark-latest.min.js" type="text/javascript"></script>
