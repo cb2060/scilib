@@ -994,7 +994,7 @@ Netherlands  41526  Amsterdam        16.9  406.973944
 
 * Sort data
 ```
->>> print countries.sort('density', ascending=False)
+>>> print countries.sort_values('density', ascending=False)
                   area    capital  population     density
 country                                                  
 Netherlands      41526  Amsterdam        16.9  406.973944

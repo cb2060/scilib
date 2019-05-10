@@ -913,8 +913,8 @@ dtype: int64
 * Slicing
 ```
 &gt;&gt;&gt; s[&#39;b&#39;: &#39;c&#39;]
-b    2
-c    3
+b    200
+c    300
 dtype: int64
 &gt;&gt;&gt;
 ```
@@ -1133,7 +1133,7 @@ Netherlands  41526  Amsterdam        16.9  406.973944
 
 * Sort data
 ```
-&gt;&gt;&gt; print countries.sort(&#39;density&#39;, ascending=False)
+&gt;&gt;&gt; print countries.sort_values(&#39;density&#39;, ascending=False)
                   area    capital  population     density
 country                                                  
 Netherlands      41526  Amsterdam        16.9  406.973944
