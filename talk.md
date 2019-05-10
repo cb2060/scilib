@@ -699,7 +699,7 @@ One-dimensional labeled data
 
 ```
 >>> s = pd.Series([0.1, 0.2, 0.3, 0.4])
->>> print s
+>>> print(s)
 0    0.1
 1    0.2
 2    0.3
@@ -709,13 +709,13 @@ dtype: float64
 ```
 --
 ```
->>> print s.index
+>>> print(s.index)
 Int64Index([0, 1, 2, 3], dtype='int64')
 
 ```
 --
 ```
->>> print s.values
+>>> print(s.values)
 [ 0.1  0.2  0.3  0.4]
 
 ```
@@ -726,13 +726,13 @@ Int64Index([0, 1, 2, 3], dtype='int64')
 
 ```
 >>> s = pd.Series(np.arange(4), index=['a', 'b', 'c', 'd'])
->>> print s
+>>> print(s)
 a    0
 b    1
 c    2
 d    3
 dtype: int64
->>> print s['d']
+>>> print(s['d'])
 3
 >>>
 ```
@@ -741,7 +741,7 @@ dtype: int64
 
 ```
 >>> s = pd.Series({'a': 1, 'b': 2, 'c': 3, 'd': 4})
->>> print s
+>>> print(s)
 a    1
 b    2
 c    3
@@ -753,7 +753,7 @@ dtype: int64
 * Indexing as a dict
 
 ```
->>> print s['a']
+>>> print(s['a'])
 1
 
 ```
@@ -761,7 +761,7 @@ dtype: int64
 
 * Elementwise operations
 ```
->>> print s * 100
+>>> print(s * 100)
 a    100
 b    200
 c    300
@@ -784,7 +784,7 @@ dtype: int64
 
 * List indexing
 ```
->>> print s[['b', 'c']]
+>>> print(s[['b', 'c']])
 b    2
 c    3
 dtype: int64
@@ -794,7 +794,7 @@ dtype: int64
 
 * Bool indexing
 ```
->>> print s[s>2]
+>>> print(s[s>2])
 c    3
 d    4
 dtype: int64
@@ -836,7 +836,7 @@ dtype: float64
 --
 ```
 >>> countries = pd.DataFrame(data)
->>> print countries
+>>> print(countries)
      area    capital         country  population
 0   30510   Brussels         Belgium        11.3
 1  671308      Paris          France        64.3
@@ -900,7 +900,7 @@ memory usage: 200.0 bytes
 
 * Set a column as index
 ```
->>> print countries
+>>> print(countries)
      area    capital         country  population
 0   30510   Brussels         Belgium        11.3
 1  671308      Paris          France        64.3
@@ -916,7 +916,7 @@ memory usage: 200.0 bytes
 ```
 --
 ```
->>> print countries
+>>> print(countries)
                   area    capital  population
 country                                      
 Belgium          30510   Brussels        11.3
@@ -931,7 +931,7 @@ United Kingdom  244820     London        64.9
 
 * Access a single series in a table
 ```
->>> print countries['area']
+>>> print(countries['area'])
 country
 Belgium            30510
 France            671308
@@ -943,7 +943,7 @@ Name: area, dtype: int64
 ```
 --
 ```
->>> print countries['capital']['France']
+>>> print(countries['capital']['France'])
 Paris
 >>>
 ```
@@ -951,7 +951,7 @@ Paris
 
 * Arithmetic (population density)
 ```
->>> print countries['population']/countries['area']*10**6
+>>> print(countries['population']/countries['area']*10**6)
 country
 Belgium           370.370370
 France             95.783158
@@ -968,7 +968,7 @@ dtype: float64
 * Add new column
 ```
 >>> countries['density'] =  countries['population']/countries['area']*10**6
->>> print countries
+>>> print(countries)
                   area    capital  population     density
 country                                                  
 Belgium          30510   Brussels        11.3  370.370370
@@ -983,7 +983,7 @@ United Kingdom  244820     London        64.9  265.092721
 
 * Filter data
 ```
->>> print countries[countries['density'] > 300]
+>>> print(countries[countries['density'] > 300])
               area    capital  population     density
 country                                              
 Belgium      30510   Brussels        11.3  370.370370
@@ -994,7 +994,7 @@ Netherlands  41526  Amsterdam        16.9  406.973944
 
 * Sort data
 ```
->>> print countries.sort_values('density', ascending=False)
+>>> print(countries.sort_values('density', ascending=False))
                   area    capital  population     density
 country                                                  
 Netherlands      41526  Amsterdam        16.9  406.973944
@@ -1009,7 +1009,7 @@ France          671308      Paris        64.3   95.783158
 
 * Statistics
 ```
->>> print countries.describe()
+>>> print(countries.describe())
                 area  population     density
 count       5.000000    5.000000    5.000000
 mean   269042.800000   47.740000  273.183879

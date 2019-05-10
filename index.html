@@ -838,7 +838,7 @@ One-dimensional labeled data
 
 ```
 &gt;&gt;&gt; s = pd.Series([0.1, 0.2, 0.3, 0.4])
-&gt;&gt;&gt; print s
+&gt;&gt;&gt; print(s)
 0    0.1
 1    0.2
 2    0.3
@@ -848,13 +848,13 @@ dtype: float64
 ```
 --
 ```
-&gt;&gt;&gt; print s.index
+&gt;&gt;&gt; print(s.index)
 Int64Index([0, 1, 2, 3], dtype=&#39;int64&#39;)
 
 ```
 --
 ```
-&gt;&gt;&gt; print s.values
+&gt;&gt;&gt; print(s.values)
 [ 0.1  0.2  0.3  0.4]
 
 ```
@@ -865,13 +865,13 @@ Int64Index([0, 1, 2, 3], dtype=&#39;int64&#39;)
 
 ```
 &gt;&gt;&gt; s = pd.Series(np.arange(4), index=[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;])
-&gt;&gt;&gt; print s
+&gt;&gt;&gt; print(s)
 a    0
 b    1
 c    2
 d    3
 dtype: int64
-&gt;&gt;&gt; print s[&#39;d&#39;]
+&gt;&gt;&gt; print(s[&#39;d&#39;])
 3
 &gt;&gt;&gt;
 ```
@@ -880,7 +880,7 @@ dtype: int64
 
 ```
 &gt;&gt;&gt; s = pd.Series({&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3, &#39;d&#39;: 4})
-&gt;&gt;&gt; print s
+&gt;&gt;&gt; print(s)
 a    1
 b    2
 c    3
@@ -892,7 +892,7 @@ dtype: int64
 * Indexing as a dict
 
 ```
-&gt;&gt;&gt; print s[&#39;a&#39;]
+&gt;&gt;&gt; print(s[&#39;a&#39;])
 1
 
 ```
@@ -900,7 +900,7 @@ dtype: int64
 
 * Elementwise operations
 ```
-&gt;&gt;&gt; print s * 100
+&gt;&gt;&gt; print(s * 100)
 a    100
 b    200
 c    300
@@ -923,7 +923,7 @@ dtype: int64
 
 * List indexing
 ```
-&gt;&gt;&gt; print s[[&#39;b&#39;, &#39;c&#39;]]
+&gt;&gt;&gt; print(s[[&#39;b&#39;, &#39;c&#39;]])
 b    2
 c    3
 dtype: int64
@@ -933,7 +933,7 @@ dtype: int64
 
 * Bool indexing
 ```
-&gt;&gt;&gt; print s[s&gt;2]
+&gt;&gt;&gt; print(s[s&gt;2])
 c    3
 d    4
 dtype: int64
@@ -975,7 +975,7 @@ dtype: float64
 --
 ```
 &gt;&gt;&gt; countries = pd.DataFrame(data)
-&gt;&gt;&gt; print countries
+&gt;&gt;&gt; print(countries)
      area    capital         country  population
 0   30510   Brussels         Belgium        11.3
 1  671308      Paris          France        64.3
@@ -1039,7 +1039,7 @@ memory usage: 200.0 bytes
 
 * Set a column as index
 ```
-&gt;&gt;&gt; print countries
+&gt;&gt;&gt; print(countries)
      area    capital         country  population
 0   30510   Brussels         Belgium        11.3
 1  671308      Paris          France        64.3
@@ -1055,7 +1055,7 @@ memory usage: 200.0 bytes
 ```
 --
 ```
-&gt;&gt;&gt; print countries
+&gt;&gt;&gt; print(countries)
                   area    capital  population
 country                                      
 Belgium          30510   Brussels        11.3
@@ -1070,7 +1070,7 @@ United Kingdom  244820     London        64.9
 
 * Access a single series in a table
 ```
-&gt;&gt;&gt; print countries[&#39;area&#39;]
+&gt;&gt;&gt; print(countries[&#39;area&#39;])
 country
 Belgium            30510
 France            671308
@@ -1082,7 +1082,7 @@ Name: area, dtype: int64
 ```
 --
 ```
-&gt;&gt;&gt; print countries[&#39;capital&#39;][&#39;France&#39;]
+&gt;&gt;&gt; print(countries[&#39;capital&#39;][&#39;France&#39;])
 Paris
 &gt;&gt;&gt;
 ```
@@ -1090,7 +1090,7 @@ Paris
 
 * Arithmetic (population density)
 ```
-&gt;&gt;&gt; print countries[&#39;population&#39;]/countries[&#39;area&#39;]*10**6
+&gt;&gt;&gt; print(countries[&#39;population&#39;]/countries[&#39;area&#39;]*10**6)
 country
 Belgium           370.370370
 France             95.783158
@@ -1107,7 +1107,7 @@ dtype: float64
 * Add new column
 ```
 &gt;&gt;&gt; countries[&#39;density&#39;] =  countries[&#39;population&#39;]/countries[&#39;area&#39;]*10**6
-&gt;&gt;&gt; print countries
+&gt;&gt;&gt; print(countries)
                   area    capital  population     density
 country                                                  
 Belgium          30510   Brussels        11.3  370.370370
@@ -1122,7 +1122,7 @@ United Kingdom  244820     London        64.9  265.092721
 
 * Filter data
 ```
-&gt;&gt;&gt; print countries[countries[&#39;density&#39;] &gt; 300]
+&gt;&gt;&gt; print(countries[countries[&#39;density&#39;] &gt; 300])
               area    capital  population     density
 country                                              
 Belgium      30510   Brussels        11.3  370.370370
@@ -1133,7 +1133,7 @@ Netherlands  41526  Amsterdam        16.9  406.973944
 
 * Sort data
 ```
-&gt;&gt;&gt; print countries.sort_values(&#39;density&#39;, ascending=False)
+&gt;&gt;&gt; print(countries.sort_values(&#39;density&#39;, ascending=False))
                   area    capital  population     density
 country                                                  
 Netherlands      41526  Amsterdam        16.9  406.973944
@@ -1148,7 +1148,7 @@ France          671308      Paris        64.3   95.783158
 
 * Statistics
 ```
-&gt;&gt;&gt; print countries.describe()
+&gt;&gt;&gt; print(countries.describe())
                 area  population     density
 count       5.000000    5.000000    5.000000
 mean   269042.800000   47.740000  273.183879
