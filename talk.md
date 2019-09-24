@@ -5,7 +5,7 @@
 
 ## 
 
-BB1000 Programming in Python
+CB2060 Applied programming for life sciences
 KTH
 
 ---
