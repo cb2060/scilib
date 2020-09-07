@@ -64,8 +64,8 @@ https://doi.org/10.3847/2041-8213/ab0e85
 
 ## What is a library?
 
-* A file
-* A directory
+* A Python source file
+* A directory with source files
 * Builtin
 * Standard library (requires import)
 * External libraries (requires install)
