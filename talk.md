@@ -12,9 +12,22 @@ KTH
 
 layout: false
 
+# TOC
+* [Scientific libraries](#1)
+  + [What can you do with Python libraries](#3)
+  + [What is a library?](#4)
+  + [Builtins](#5)
+  + [Standard library](#6)
+  + [External Python libraries](#7)
+  + [Are you a math genius?](#8)
+  + [More linear algebra](#27)
+  + [Refernces](#29)
+  + [Matplotlib](#30)
+  + [First example](#31)
+  + [The `pandas` module](#35)
 
+---
 
---
 ## What can you do with Python libraries
 
 *This year’s Nobel Prize in economics was awarded to a Python convert*
