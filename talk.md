@@ -570,9 +570,10 @@ $$Ax = x\lambda$$
 * You have a set of points (x,y) on file
 
 <!--
+>>> import numpy as np
 >>> x = np.linspace(-np.pi, np.pi, 100)
 >>> y = np.sin(x)
->>> np.savetxt('data.txt', np.array(zip(x, y)))
+>>> np.savetxt('data.txt', np.array(list(zip(x, y))))
 
 -->
 

@@ -169,7 +169,7 @@ layout: false
 
 ## What can you do with Python libraries
 
-*This year’s Nobel Prize in economics was awarded to a Python convert*
+*The 2018 Nobel Prize in economics was awarded to a Python convert*
 &lt;img height=200 src=&#34;https://cms.qz.com/wp-content/uploads/2018/10/Paul-Romer-Jupyter.jpg?quality=75&amp;strip=all&amp;w=1600&amp;h=901&#34;&gt;
 
 
@@ -205,8 +205,9 @@ https://doi.org/10.3847/2041-8213/ab0e85
 
 * A Python source file
 * A directory with source files
-* The builtins module
-* Standard library (requires import)
+* The Standard library
+    - builtins
+    - imported
 * External libraries (requires install)
 
 ---
@@ -215,6 +216,7 @@ https://doi.org/10.3847/2041-8213/ab0e85
 
 The builtins module contain the most common functions, types that are
 immediately available
+
 
 &lt;!--
 &gt;&gt;&gt; import builtins
@@ -234,8 +236,8 @@ immediately available
 &#39;slice&#39;, &#39;sorted&#39;, &#39;staticmethod&#39;, &#39;str&#39;, &#39;sum&#39;, &#39;super&#39;, &#39;tuple&#39;, &#39;type&#39;,
 &#39;vars&#39;, &#39;zip&#39;]
 
-&gt;&gt;&gt; 
 ~~~
+https://docs.python.org/3/library/functions.html
 ~~~
 &gt;&gt;&gt; abs(-1)
 1
@@ -251,11 +253,12 @@ True
 
 ## Standard library
 
-Included in all distributions, but requires an import statement for access
+Included in all distributions. Those not in the `builtins` module require an
+`import` statement for access
 
 ~~~
 &gt;&gt;&gt; import math
-&gt;&gt;&gt; print(math.pi)
+&gt;&gt;&gt; math.pi
 3.141592653589793
 
 ~~~
@@ -270,9 +273,7 @@ https://docs.python.org/3/library/
 ## External Python libraries
 
 - NumPy: &#39;Numerical python&#39;, linear algebra, https://www.numpy.org/
-
 - Pandas: High-level library for tabular data, https://pandas.pydata.org/
-
 - Matplotlib: fundamental plotting module, https://matplotlib.org/
 
 
@@ -581,26 +582,6 @@ dot timing...
 
 ---
 
-### The Fortran version
-
-```fortran
-    INTEGER, PARAMETER :: N = 256
-    REAL*8, DIMENSION(N,N) :: A, B, C
-    ! Timing
-    INTEGER :: T1, T2, RATE
-    ! Initialize
-    A = 1.0
-    B = 1.0
-    !
-    CALL SYSTEM_CLOCK(COUNT_RATE=RATE)
-    CALL SYSTEM_CLOCK(COUNT=T1)
-    C = MATMUL(A, B)
-    CALL SYSTEM_CLOCK(COUNT=T2)
-    PRINT &#39;(A, F6.2)&#39;, &#39;MATMUL timing&#39;,  DBLE(T2-T1)/RATE
-    END
-```
----
-
 ### Conclusion
 
 * Provided that numpy has been install properly (difficult) and linked with optimized libraries, basic linear algebra work as fast in python as in Fortran (or C/C++)
@@ -727,16 +708,35 @@ $$Ax = x\lambda$$
 
 * You have a set of points (x,y) on file
 
+&lt;!--
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; x = np.linspace(-np.pi, np.pi, 100)
+&gt;&gt;&gt; y = np.sin(x)
+&gt;&gt;&gt; np.savetxt(&#39;data.txt&#39;, np.array(list(zip(x, y))))
+
+--&gt;
+
 ```
--3.141593 -0.000000
--3.013364 -0.127877
--2.885136 -0.253655
+$ head data.txt
+-3.141592653589793116e+00 -1.224646799147353207e-16
+-3.078126135335453650e+00 -6.342391965656483943e-02
+-3.014659617081114629e+00 -1.265924535737493750e-01
+-2.951193098826775163e+00 -1.892512443604104921e-01
+-2.887726580572436141e+00 -2.511479871810792797e-01
+-2.824260062318096676e+00 -3.120334456984873439e-01
+-2.760793544063757654e+00 -3.716624556603275731e-01
+-2.697327025809418188e+00 -4.297949120891718100e-01
+-2.633860507555079167e+00 -4.861967361004687072e-01
+-2.570393989300739701e+00 -5.406408174555977775e-01
 ...
-3.141593 0.000000
+
 ```
 --
 
 * How do you get to  this
+
+&lt;!---
+---&gt;
 
 &lt;img src=&#34;img/sin.png&#34; height=&#34;250&#34; /&gt;
 
@@ -973,7 +973,7 @@ dtype: float64
 --
 ```
 &gt;&gt;&gt; countries = pd.DataFrame(data)
-&gt;&gt;&gt; print(countries)
+&gt;&gt;&gt; countries
               country  population    area    capital
     0         Belgium        11.3   30510   Brussels
     1          France        64.3  671308      Paris
@@ -1041,7 +1041,7 @@ memory usage: 288.0+ bytes
 * Set a column as index
 
 ~~~
-&gt;&gt;&gt; print(countries)
+&gt;&gt;&gt; countries
           country  population    area    capital
 0         Belgium        11.3   30510   Brussels
 1          France        64.3  671308      Paris
@@ -1058,7 +1058,7 @@ memory usage: 288.0+ bytes
 ```
 --
 ```
-&gt;&gt;&gt; print(countries)
+&gt;&gt;&gt; countries
                     population    area    capital
 country                                      
 Belgium               11.3   30510   Brussels
@@ -1074,7 +1074,7 @@ United Kingdom        64.9  244820     London
 * Access a single series in a table
 
 ```
-&gt;&gt;&gt; print(countries[&#39;area&#39;])
+&gt;&gt;&gt; countries[&#39;area&#39;]
 country
 Belgium            30510
 France            671308
@@ -1086,8 +1086,8 @@ Name: area, dtype: int64
 ```
 --
 ```
-&gt;&gt;&gt; print(countries[&#39;capital&#39;][&#39;France&#39;])
-Paris
+&gt;&gt;&gt; countries[&#39;capital&#39;][&#39;France&#39;]
+&#39;Paris&#39;
 
 ```
 --
@@ -1095,7 +1095,7 @@ Paris
 * Arithmetic (population density)
 
 ```
-&gt;&gt;&gt; print(countries[&#39;population&#39;]/countries[&#39;area&#39;]*10**6)
+&gt;&gt;&gt; countries[&#39;population&#39;]/countries[&#39;area&#39;]*10**6
 country
 Belgium           370.370370
 France             95.783158
@@ -1108,12 +1108,11 @@ dtype: float64
 
 ---
 
-
 * Add new column
 
 ```
 &gt;&gt;&gt; countries[&#39;density&#39;] =  countries[&#39;population&#39;]/countries[&#39;area&#39;]*10**6
-&gt;&gt;&gt; print(countries)
+&gt;&gt;&gt; countries
                     population    area    capital     density
 country                                                  
 Belgium               11.3   30510   Brussels  370.370370
@@ -1129,7 +1128,7 @@ United Kingdom        64.9  244820     London  265.092721
 * Filter data
 
 ```
-&gt;&gt;&gt; print(countries[countries[&#39;density&#39;] &gt; 300])
+&gt;&gt;&gt; countries[countries[&#39;density&#39;] &gt; 300]
              population   area    capital     density
 country                                              
 Belgium            11.3  30510   Brussels  370.370370
@@ -1141,7 +1140,7 @@ Netherlands        16.9  41526  Amsterdam  406.973944
 * Sort data
 
 ~~~
-&gt;&gt;&gt; print(countries.sort_values(&#39;density&#39;, ascending=False))
+&gt;&gt;&gt; countries.sort_values(&#39;density&#39;, ascending=False)
                 population    area    capital     density
 country                                                  
 Netherlands           16.9   41526  Amsterdam  406.973944
@@ -1157,7 +1156,7 @@ France                64.3  671308      Paris   95.783158
 * Statistics
 
 ~~~
-&gt;&gt;&gt; print(countries.describe())
+&gt;&gt;&gt; countries.describe()
        population           area     density
 count    5.000000       5.000000    5.000000
 mean    47.740000  269042.800000  273.183879
@@ -1173,6 +1172,15 @@ max     81.300000  671308.000000  406.973944
 
 * Plotting
 
+&lt;!--
+&gt;&gt;&gt; import matplotlib.pyplot as plt
+&gt;&gt;&gt; fig, ax = plt.subplots()
+&gt;&gt;&gt; countries.plot(ax=ax)
+&lt;AxesSubplot:xlabel=&#39;country&#39;&gt;
+&gt;&gt;&gt; fig.savefig(&#39;figure_1.png&#39;)
+
+--&gt;
+
 ```
 &gt;&gt;&gt; countries.plot() 
 
@@ -1180,6 +1188,15 @@ max     81.300000  671308.000000  406.973944
 &lt;img src=&#34;figure_1.png&#34; height=&#34;300&#34;/&gt;
 ---
 * Plotting barchart
+
+&lt;!--
+&gt;&gt;&gt; fig, ax = plt.subplots()
+&gt;&gt;&gt; countries.plot(kind=&#39;bar&#39;, ax=ax)
+&lt;AxesSubplot:xlabel=&#39;country&#39;&gt;
+&gt;&gt;&gt; fig.savefig(&#39;figure_2.png&#39;)
+
+--&gt;
+
 ```
 &gt;&gt;&gt; countries.plot(kind=&#39;bar&#39;) 
 
