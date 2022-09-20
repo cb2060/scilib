@@ -30,7 +30,7 @@ layout: false
 
 ## What can you do with Python libraries
 
-*This year’s Nobel Prize in economics was awarded to a Python convert*
+*The 2018 Nobel Prize in economics was awarded to a Python convert*
 <img height=200 src="https://cms.qz.com/wp-content/uploads/2018/10/Paul-Romer-Jupyter.jpg?quality=75&strip=all&w=1600&h=901">
 
 
@@ -66,58 +66,62 @@ https://doi.org/10.3847/2041-8213/ab0e85
 
 * A Python source file
 * A directory with source files
-* Builtin
-* Standard library (requires import)
+* The Standard library
+    - builtins
+    - imported
 * External libraries (requires install)
 
 ---
 
 ## Builtins
 
-```
->>> dir()
-['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__']
-```
+The builtins module contain the most common functions, types that are
+immediately available
+
+
+<!--
+>>> import builtins
+
+-->
 
 ~~~
->>> __builtins__
-<module 'builtins' (built-in)>
+>>> dir(builtins)[-73:]
+['abs', 'all', 'any', 'ascii', 'bin', 'bool', 'breakpoint', 'bytearray',
+'bytes', 'callable', 'chr', 'classmethod', 'compile', 'complex', 'copyright',
+'credits', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec',
+'exit', 'filter', 'float', 'format', 'frozenset', 'getattr', 'globals',
+'hasattr', 'hash', 'help', 'hex', 'id', 'input', 'int', 'isinstance',
+'issubclass', 'iter', 'len', 'license', 'list', 'locals', 'map', 'max',
+'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow', 'print',
+'property', 'quit', 'range', 'repr', 'reversed', 'round', 'set', 'setattr',
+'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super', 'tuple', 'type',
+'vars', 'zip']
+
 ~~~
+https://docs.python.org/3/library/functions.html
 ~~~
->>> dir(__builtins__)
-[
+>>> abs(-1)
+1
+>>> all([True, False])
+False
+>>> any([True, False])
+True
+
 ...
- 'print',
- 'property',
- 'quit',
- 'range',
- 'repr',
- 'reversed',
- 'round',
- 'set',
- 'setattr',
- 'slice',
- 'sorted',
- 'staticmethod',
- 'str',
- 'sum',
- 'super',
- 'tuple',
- 'type',
- 'vars',
- 'zip']
 ~~~
 
 ---
 
 ## Standard library
 
-Included in all distributions, but requires an import statement for access
+Included in all distributions. Those not in the `builtins` module require an
+`import` statement for access
 
 ~~~
 >>> import math
->>> print(math.pi)
+>>> math.pi
 3.141592653589793
+
 ~~~
 
 https://docs.python.org/3/library/
@@ -130,9 +134,7 @@ https://docs.python.org/3/library/
 ## External Python libraries
 
 - NumPy: 'Numerical python', linear algebra, https://www.numpy.org/
-
 - Pandas: High-level library for tabular data, https://pandas.pydata.org/
-
 - Matplotlib: fundamental plotting module, https://matplotlib.org/
 
 
@@ -195,12 +197,12 @@ $$
 >>> import numpy
 >>> a = numpy.zeros(3)
 >>> print(type(a), a)
-<class 'numpy.ndarray'> [ 0.  0.  0.]
+<class 'numpy.ndarray'> [0. 0. 0.]
 >>> b = numpy.zeros((3, 3))
 >>> print(b)
-[[ 0.  0.  0.]
- [ 0.  0.  0.]
- [ 0.  0.  0.]]
+[[0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 0.]]
 
 ```
 
@@ -212,7 +214,7 @@ $$
     >>> x = numpy.zeros(2)
     >>> y = x
     >>> x[0] = 1; print(x, y)
-    [ 1.  0.] [ 1.  0.]
+    [1. 0.] [1. 0.]
 
 ```
     
@@ -241,14 +243,14 @@ Numpy array copy method
 
 ```
     >>> print(numpy.linspace(0,1,6))
-    [ 0.   0.2  0.4  0.6  0.8  1. ]
+    [0.  0.2  0.4  0.6  0.8  1. ]
 
 ```
 
 ``arange`` is a similar function
 ::
     >>> print(numpy.arange(0, 1, 0.2))
-    [ 0.   0.2  0.4  0.6  0.8]
+    [0.   0.2  0.4  0.6  0.8]
 
 ---
 
@@ -258,15 +260,15 @@ Numpy array copy method
     >>> la=[1.,2.,3.]
     >>> a=numpy.array(la)
     >>> print(a)
-    [ 1.  2.  3.]
+    [1.  2.  3.]
 
 ```
 ```
     >>> lb=[4., 5., 6.]
     >>> ab=numpy.array([la,lb])
     >>> print(ab)
-    [[ 1.  2.  3.]
-     [ 4.  5.  6.]]
+    [[1.  2.  3.]
+     [4.  5.  6.]]
 
 ```
 
@@ -292,8 +294,8 @@ Numpy array copy method
 ```
     >>> a = numpy.loadtxt('a.dat')
     >>> print(a)
-    [[ 1.  2.  3.]
-     [ 4.  5.  6.]]
+    [[1.  2.  3.]
+     [4.  5.  6.]]
 
 ```
 If you have a text file with only numerical data
@@ -310,7 +312,7 @@ by changing the shape attribute
 (2, 3)
 >>> ab.shape = (6,)
 >>> print(ab)
-[ 1.  2.  3.  4.  5.  6.]
+[1. 2. 3. 4. 5. 6.]
 
 ```
 
@@ -319,9 +321,9 @@ with the reshape method
 ```
     >>> ba = ab.reshape((3, 2))
     >>> print(ba)
-    [[ 1.  2.]
-     [ 3.  4.]
-     [ 5.  6.]]
+    [[1. 2.]
+     [3. 4.]
+     [5. 6.]]
 
 ```
 ---
@@ -333,11 +335,11 @@ with the reshape method
 ```
 >>> ab[0] = 0
 >>> print(ab)
-[ 0.  2.  3.  4.  5.  6.]
+[0.  2.  3.  4.  5.  6.]
 >>> print(ba)
-[[ 0.  2.]
- [ 3.  4.]
- [ 5.  6.]]
+[[0. 2.]
+ [3. 4.]
+ [5. 6.]]
 
 ```
 ---
@@ -356,44 +358,29 @@ like lists
 ### Looping over elements
 
 ```
->>> r, c = ba.shape
->>> for i in range(r):
-...    line = ""
-...    for j in range(c):
-...        line += "%10.3f" % ba[i, j]
-...    print(line)
-     0.000     4.000
-     2.000     5.000
-     3.000     6.000
-
-```
-
-or
-
-```
 >>> for row in ba:
-...     print("".join("%10.3f" % el for el in row))
-     0.000     4.000
-     2.000     5.000
-     3.000     6.000
+...    for element in row:
+...        print(f"{element:10.3f}", end="")
+...    print()
+     0.000     2.000
+     3.000     4.000
+     5.000     6.000
 
 ```
 
-more *Pythonic*
+### Flattening an array
 
----
-
-* The `ravel` methods returns a one-dim array
+* The `ravel` method returns a one-dim array
 
 ```
-    >>> for e in ba.ravel():
-    ...    print(e)
-    0.0
-    4.0
-    2.0
-    5.0
-    3.0
-    6.0
+>>> for e in ba.ravel():
+...    print(e)
+0.0
+2.0
+3.0
+4.0
+5.0
+6.0
 
 ```
     
@@ -405,10 +392,10 @@ more *Pythonic*
     >>> for ind, val in numpy.ndenumerate(ba):
     ...    print(ind, val )
     (0, 0) 0.0
-    (0, 1) 4.0
-    (1, 0) 2.0
-    (1, 1) 5.0
-    (2, 0) 3.0
+    (0, 1) 2.0
+    (1, 0) 3.0
+    (1, 1) 4.0
+    (2, 0) 5.0
     (2, 1) 6.0
 
 ```
@@ -421,19 +408,19 @@ more *Pythonic*
 * explicit looping
 
 ```
-    >>> import numpy, time
-    >>> n=256
-    >>> a=numpy.ones((n,n))
-    >>> b=numpy.ones((n,n))
-    >>> c=numpy.zeros((n,n))
-    >>> t1=time.clock()
-    >>> for i in range(n):
-    ...    for j in range(n):
-    ...        for k in range(n):
-    ...            c[i,j]+=a[i,k]*b[k,j]
-    >>> t2=time.clock()
-    >>> print("Loop timing",t2-t1 )
-    Loop timing ...
+>>> import numpy, time
+>>> n=256
+>>> a=numpy.ones((n,n))
+>>> b=numpy.ones((n,n))
+>>> c=numpy.zeros((n,n))
+>>> t1=time.time()
+>>> for i in range(n):  #doctest: +SKIP 
+...    for j in range(n):
+...        for k in range(n):
+...            c[i,j]+=a[i,k]*b[k,j]
+>>> t2=time.time()
+>>> print("Loop timing",t2-t1 ) #doctest: +SKIP 
+Loop timing ...
 
 ```
 
@@ -442,38 +429,18 @@ more *Pythonic*
 * using `numpy.dot`
 
 ```
-    >>> import numpy, time
-    >>> n=256
-    >>> a=numpy.ones((n,n))
-    >>> b=numpy.ones((n,n))
-    >>> t1=time.clock()
-    >>> c=numpy.dot(a,b)
-    >>> t2=time.clock()
-    >>> print("dot timing",t2-t1)
-    dot ...
+>>> import numpy, time
+>>> n=256
+>>> a=numpy.ones((n,n))
+>>> b=numpy.ones((n,n))
+>>> t1=time.time()
+>>> c=numpy.dot(a,b)
+>>> t2=time.time()
+>>> print("dot timing",t2-t1) #doctest: +SKIP 
+dot timing...
 
 ```
 
----
-
-### The Fortran version
-
-```fortran
-    INTEGER, PARAMETER :: N = 256
-    REAL*8, DIMENSION(N,N) :: A, B, C
-    ! Timing
-    INTEGER :: T1, T2, RATE
-    ! Initialize
-    A = 1.0
-    B = 1.0
-    !
-    CALL SYSTEM_CLOCK(COUNT_RATE=RATE)
-    CALL SYSTEM_CLOCK(COUNT=T1)
-    C = MATMUL(A, B)
-    CALL SYSTEM_CLOCK(COUNT=T2)
-    PRINT '(A, F6.2)', 'MATMUL timing',  DBLE(T2-T1)/RATE
-    END
-```
 ---
 
 ### Conclusion
@@ -495,30 +462,29 @@ Note that for objects of ``ndarray`` type, multiplication means elementwise mult
 ### Vectorized elementary functions
 
 ```
-    >>> v = numpy.arange(0, 1, .2)
-    >>> print(v)
-    [ 0.   0.2  0.4  0.6  0.8]
+>>> v = numpy.arange(0, 1, .2)
+>>> print(v)
+[0.   0.2  0.4  0.6  0.8]
 
 ```
 --
 ```
-    >>> print(numpy.cos(v))
-    [ 1.          0.98006658  0.92106099  0.82533561  0.69670671]
+>>> print(numpy.cos(v))
+[1.          0.98006658  0.92106099  0.82533561  0.69670671]
 
 ```
 --
 ```
-    >>> print(numpy.sqrt(v))
-    [ 0.          0.4472136   0.63245553  0.77459667  0.89442719]
+>>> print(numpy.sqrt(v))
+[0.          0.4472136   0.63245553  0.77459667  0.89442719]
 
 ```
 --
 ```
-    >>> print(numpy.log(v))
-    ./linalg.py:98: RuntimeWarning: divide by zero encountered in log
-      print(numpy.log(v))
-    [       -inf -1.60943791 -0.91629073 -0.51082562 -0.22314355]
+>>> print(numpy.log(v))
+[       -inf -1.60943791 -0.91629073 -0.51082562 -0.22314355]
 
+# ./linalg.py:98: RuntimeWarning: divide by zero encountered in log
 ```
 
 ---
@@ -603,16 +569,34 @@ $$Ax = x\lambda$$
 
 * You have a set of points (x,y) on file
 
+<!--
+>>> x = np.linspace(-np.pi, np.pi, 100)
+>>> y = np.sin(x)
+>>> np.savetxt('data.txt', np.array(zip(x, y)))
+
+-->
+
 ```
--3.141593 -0.000000
--3.013364 -0.127877
--2.885136 -0.253655
+$ head data.txt
+-3.141592653589793116e+00 -1.224646799147353207e-16
+-3.078126135335453650e+00 -6.342391965656483943e-02
+-3.014659617081114629e+00 -1.265924535737493750e-01
+-2.951193098826775163e+00 -1.892512443604104921e-01
+-2.887726580572436141e+00 -2.511479871810792797e-01
+-2.824260062318096676e+00 -3.120334456984873439e-01
+-2.760793544063757654e+00 -3.716624556603275731e-01
+-2.697327025809418188e+00 -4.297949120891718100e-01
+-2.633860507555079167e+00 -4.861967361004687072e-01
+-2.570393989300739701e+00 -5.406408174555977775e-01
 ...
-3.141593 0.000000
+
 ```
 --
 
 * How do you get to  this
+
+<!---
+--->
 
 <img src="img/sin.png" height="250" />
 
@@ -723,13 +707,13 @@ dtype: float64
 --
 ```
 >>> print(s.index)
-Int64Index([0, 1, 2, 3], dtype='int64')
+RangeIndex(start=0, stop=4, step=1)
 
 ```
 --
 ```
 >>> print(s.values)
-[ 0.1  0.2  0.3  0.4]
+[0.1 0.2 0.3 0.4]
 
 ```
 
@@ -747,7 +731,7 @@ d    3
 dtype: int64
 >>> print(s['d'])
 3
->>>
+
 ```
 --
 * Initialize with dict
@@ -760,7 +744,7 @@ b    2
 c    3
 d    4
 dtype: int64
->>>
+
 ```
 --
 * Indexing as a dict
@@ -780,17 +764,17 @@ b    200
 c    300
 d    400
 dtype: int64
->>>
+
 ```
 --
 
 * Slicing
 ```
 >>> s['b': 'c']
-b    200
-c    300
+b    2
+c    3
 dtype: int64
->>>
+
 ```
 
 ---
@@ -801,7 +785,7 @@ dtype: int64
 b    2
 c    3
 dtype: int64
->>>
+
 ```
 --
 
@@ -811,7 +795,7 @@ dtype: int64
 c    3
 d    4
 dtype: int64
->>>
+
 ```
 --
 
@@ -819,7 +803,7 @@ dtype: int64
 ```
 >>> s.mean()
 2.5
->>>
+
 ```
 ---
 
@@ -827,10 +811,10 @@ dtype: int64
 ```
 >>> s['a':'b'] + s['b':'c']
 a   NaN
-b     4
+b   4.0
 c   NaN
 dtype: float64
->>>
+
 ```
 ---
 
@@ -844,19 +828,19 @@ dtype: float64
 ...        'population': [11.3, 64.3, 81.3, 16.9, 64.9],
 ...        'area': [30510, 671308, 357050, 41526, 244820],
 ...        'capital': ['Brussels', 'Paris', 'Berlin', 'Amsterdam', 'London']}
->>>
+
 ```
 --
 ```
 >>> countries = pd.DataFrame(data)
->>> print(countries)
-     area    capital         country  population
-0   30510   Brussels         Belgium        11.3
-1  671308      Paris          France        64.3
-2  357050     Berlin         Germany        81.3
-3   41526  Amsterdam     Netherlands        16.9
-4  244820     London  United Kingdom        64.9
->>>
+>>> countries
+              country  population    area    capital
+    0         Belgium        11.3   30510   Brussels
+    1          France        64.3  671308      Paris
+    2         Germany        81.3  357050     Berlin
+    3     Netherlands        16.9   41526  Amsterdam
+    4  United Kingdom        64.9  244820     London
+
 ```
 
 ---
@@ -865,86 +849,92 @@ dtype: float64
 
 ```
 >>> countries.index
-Int64Index([0, 1, 2, 3, 4], dtype='int64')
->>>
+RangeIndex(start=0, stop=5, step=1)
+
 ```
 --
 ```
 >>> countries.columns
-Index(['area', 'capital', 'country', 'population'], dtype='object')
->>>
+Index(['country', 'population', 'area', 'capital'], dtype='object')
+
 ```
 --
 ```
 >>> countries.dtypes
-area            int64
-capital        object
-country        object
-population    float64
-dtype: object
->>>
+    country        object
+    population    float64
+    area            int64
+    capital        object
+    dtype: object
+
 ```
 --
 ```
 >>> countries.values
-array([[30510, 'Brussels', 'Belgium', 11.3],
-       [671308, 'Paris', 'France', 64.3],
-       [357050, 'Berlin', 'Germany', 81.3],
-       [41526, 'Amsterdam', 'Netherlands', 16.9],
-       [244820, 'London', 'United Kingdom', 64.9]], dtype=object)
->>>
+    array([['Belgium', 11.3, 30510, 'Brussels'],
+           ['France', 64.3, 671308, 'Paris'],
+           ['Germany', 81.3, 357050, 'Berlin'],
+           ['Netherlands', 16.9, 41526, 'Amsterdam'],
+           ['United Kingdom', 64.9, 244820, 'London']], dtype=object)
+
 ```
 ---
-* Info
+* Concise summary of a dataframe: `info`
+
 ```
 >>> countries.info()
 <class 'pandas.core.frame.DataFrame'>
-Int64Index: 5 entries, 0 to 4
+RangeIndex: 5 entries, 0 to 4
 Data columns (total 4 columns):
-area          5 non-null int64
-capital       5 non-null object
-country       5 non-null object
-population    5 non-null float64
+ #   Column      Non-Null Count  Dtype  
+---  ------      --------------  -----  
+ 0   country     5 non-null      object 
+ 1   population  5 non-null      float64
+ 2   area        5 non-null      int64  
+ 3   capital     5 non-null      object 
 dtypes: float64(1), int64(1), object(2)
-memory usage: 200.0 bytes
->>>
+memory usage: 288.0+ bytes
+
 ```
 ---
 
 * Set a column as index
-```
->>> print(countries)
-     area    capital         country  population
-0   30510   Brussels         Belgium        11.3
-1  671308      Paris          France        64.3
-2  357050     Berlin         Germany        81.3
-3   41526  Amsterdam     Netherlands        16.9
-4  244820     London  United Kingdom        64.9
->>>
-```
+
+~~~
+>>> countries
+          country  population    area    capital
+0         Belgium        11.3   30510   Brussels
+1          France        64.3  671308      Paris
+2         Germany        81.3  357050     Berlin
+3     Netherlands        16.9   41526  Amsterdam
+4  United Kingdom        64.9  244820     London
+
+~~~
 --
+
 ```
 >>> countries = countries.set_index('country')
->>>
+
 ```
 --
 ```
->>> print(countries)
-                  area    capital  population
+>>> countries
+                    population    area    capital
 country                                      
-Belgium          30510   Brussels        11.3
-France          671308      Paris        64.3
-Germany         357050     Berlin        81.3
-Netherlands      41526  Amsterdam        16.9
-United Kingdom  244820     London        64.9
->>>
+Belgium               11.3   30510   Brussels
+France                64.3  671308      Paris
+Germany               81.3  357050     Berlin
+Netherlands           16.9   41526  Amsterdam
+United Kingdom        64.9  244820     London
+
 ```
 
 ---
 
 * Access a single series in a table
+
 ```
->>> print(countries['area'])
+>>> countries['area']
 country
 Belgium            30510
 France            671308
@@ -952,19 +942,20 @@ Germany           357050
 Netherlands        41526
 United Kingdom    244820
 Name: area, dtype: int64
->>>
+
 ```
 --
 ```
->>> print(countries['capital']['France'])
-Paris
->>>
+>>> countries['capital']['France']
+'Paris'
+
 ```
 --
 
 * Arithmetic (population density)
+
 ```
->>> print(countries['population']/countries['area']*10**6)
+>>> countries['population']/countries['area']*10**6
 country
 Belgium           370.370370
 France             95.783158
@@ -972,81 +963,103 @@ Germany           227.699202
 Netherlands       406.973944
 United Kingdom    265.092721
 dtype: float64
->>>
+
 ```
 
 ---
 
-
 * Add new column
+
 ```
 >>> countries['density'] =  countries['population']/countries['area']*10**6
->>> print(countries)
-                  area    capital  population     density
+>>> countries
+                    population    area    capital     density
 country                                                  
-Belgium          30510   Brussels        11.3  370.370370
-France          671308      Paris        64.3   95.783158
-Germany         357050     Berlin        81.3  227.699202
-Netherlands      41526  Amsterdam        16.9  406.973944
-United Kingdom  244820     London        64.9  265.092721
->>>
+Belgium               11.3   30510   Brussels  370.370370
+France                64.3  671308      Paris   95.783158
+Germany               81.3  357050     Berlin  227.699202
+Netherlands           16.9   41526  Amsterdam  406.973944
+United Kingdom        64.9  244820     London  265.092721
+
 ```
 
 --
 
 * Filter data
+
 ```
->>> print(countries[countries['density'] > 300])
-              area    capital  population     density
+>>> countries[countries['density'] > 300]
+             population   area    capital     density
 country                                              
-Belgium      30510   Brussels        11.3  370.370370
-Netherlands  41526  Amsterdam        16.9  406.973944
->>>
+Belgium            11.3  30510   Brussels  370.370370
+Netherlands        16.9  41526  Amsterdam  406.973944
+
 ```
 ---
 
 * Sort data
-```
->>> print(countries.sort_values('density', ascending=False))
-                  area    capital  population     density
+
+~~~
+>>> countries.sort_values('density', ascending=False)
+                population    area    capital     density
 country                                                  
-Netherlands      41526  Amsterdam        16.9  406.973944
-Belgium          30510   Brussels        11.3  370.370370
-United Kingdom  244820     London        64.9  265.092721
-Germany         357050     Berlin        81.3  227.699202
-France          671308      Paris        64.3   95.783158
->>>
-```
+Netherlands           16.9   41526  Amsterdam  406.973944
+Belgium               11.3   30510   Brussels  370.370370
+United Kingdom        64.9  244820     London  265.092721
+Germany               81.3  357050     Berlin  227.699202
+France                64.3  671308      Paris   95.783158
+
+~~~
 
 --
 
 * Statistics
-```
->>> print(countries.describe())
-                area  population     density
-count       5.000000    5.000000    5.000000
-mean   269042.800000   47.740000  273.183879
-std    264012.827994   31.519645  123.440607
-min     30510.000000   11.300000   95.783158
-25%     41526.000000   16.900000  227.699202
-50%    244820.000000   64.300000  265.092721
-75%    357050.000000   64.900000  370.370370
-max    671308.000000   81.300000  406.973944
->>>
-```
+
+~~~
+>>> countries.describe()
+       population           area     density
+count    5.000000       5.000000    5.000000
+mean    47.740000  269042.800000  273.183879
+std     31.519645  264012.827994  123.440607
+min     11.300000   30510.000000   95.783158
+25%     16.900000   41526.000000  227.699202
+50%     64.300000  244820.000000  265.092721
+75%     64.900000  357050.000000  370.370370
+max     81.300000  671308.000000  406.973944
+
+~~~
 ---
 
 * Plotting
+
+<!--
+>>> import matplotlib.pyplot as plt
+>>> fig, ax = plt.subplots()
+>>> countries.plot(ax=ax)
+<AxesSubplot:xlabel='country'>
+>>> fig.savefig('figure_1.png')
+
+-->
+
 ```
->>> countries.plot()
->>>
+>>> countries.plot() #doctest: +SKIP
+
 ```
 <img src="figure_1.png" height="300"/>
 ---
 * Plotting barchart
+
+<!--
+>>> fig, ax = plt.subplots()
+>>> countries.plot(kind='bar', ax=ax)
+<AxesSubplot:xlabel='country'>
+>>> fig.savefig('figure_2.png')
+
+-->
+
 ```
->>> countries.plot(kind='bar')
->>>
+>>> countries.plot(kind='bar') #doctest: +SKIP
+
 ```
 <img src="figure_2.png" height="300"/>
 ---

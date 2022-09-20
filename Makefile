@@ -1,8 +1,9 @@
 index.html: talk.md
 	python refreeze/freeze.py
+	vim -s script index.html
 
 test:
-	nosetests -vx --with-doctest --doctest-extension=md talk.md
+	python -m doctest talk.md -f -o NORMALIZE_WHITESPACE
 
 RANDOM_PORT=`python -c 'import random; print(int(5000+ 5000*random.random()))'`
 
