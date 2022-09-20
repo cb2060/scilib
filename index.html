@@ -897,6 +897,7 @@ dtype: int64
 ---
 
 * Elementwise operations
+
 ```
 &gt;&gt;&gt; print(s * 100)
 a    100
@@ -909,6 +910,7 @@ dtype: int64
 --
 
 * Slicing
+
 ```
 &gt;&gt;&gt; s[&#39;b&#39;: &#39;c&#39;]
 b    2
@@ -920,6 +922,7 @@ dtype: int64
 ---
 
 * List indexing
+
 ```
 &gt;&gt;&gt; print(s[[&#39;b&#39;, &#39;c&#39;]])
 b    2
@@ -930,6 +933,7 @@ dtype: int64
 --
 
 * Bool indexing
+
 ```
 &gt;&gt;&gt; print(s[s&gt;2])
 c    3
@@ -940,6 +944,7 @@ dtype: int64
 --
 
 * Other operations
+
 ```
 &gt;&gt;&gt; s.mean()
 2.5
@@ -948,6 +953,7 @@ dtype: int64
 ---
 
 * Alignment on indices
+
 ```
 &gt;&gt;&gt; s[&#39;a&#39;:&#39;b&#39;] + s[&#39;b&#39;:&#39;c&#39;]
 a   NaN
